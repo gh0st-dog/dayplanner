@@ -4,11 +4,23 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var orm = require('orm');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var tasks = require('./routes/tasks');
 
 var app = express();
+
+app.use(orm.express("sqlite://database.sqlite", {
+    define: function (db, models, next) {
+        models.task = db.define("task", {
+            label: String,
+            date: Object,
+            description: String
+        });
+        next();
+    }
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,7 +34,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/tasks', tasks);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
