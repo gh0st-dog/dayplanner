@@ -36,6 +36,27 @@ module.exports = function(grunt) {
                         dest: 'public/js/',
                         filter: 'isFile'
                     },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/jquery-ui/ui/minified/',
+                        src: ['jquery-ui.datepicker.min.js'],
+                        dest: 'public/js/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/jquery-ui/ui/minified/i18n/',
+                        src: ['jquery-ui.datepicker-ru.min.js'],
+                        dest: 'public/js/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/jquery-ui/themes/ui-lightness/',
+                        src: ['jquery-ui.min.js'],
+                        dest: 'public/js/',
+                        filter: 'isFile'
+                    },
                 ]
             }
         }
